@@ -42,9 +42,9 @@ module Refile
       request = Net::HTTP::Post.new(uri.request_uri)
       request.basic_auth('api', key)
 
-      response = http.request(request, File.binread(input))
+      response = http.request(request, ::File.binread(input))
       if response.code == '201'
-        File.binwrite(output, http.get(response['location']).body)
+        ::File.binwrite(output, http.get(response['location']).body)
       else
         raise response.body
       end
